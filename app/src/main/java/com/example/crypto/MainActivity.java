@@ -3,6 +3,7 @@ package com.example.crypto;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.main_grid);
         GridAdapter adapter = new GridAdapter(icons);
         gridView.setAdapter(adapter);
-        gridView.setNumColumns(2);
-        gridView.setVerticalSpacing(2);
-        gridView.setHorizontalSpacing(1);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

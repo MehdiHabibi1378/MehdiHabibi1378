@@ -6,7 +6,6 @@
     android:layout_height="300dp"
     android:background="@drawable/round_background">
 
-
     <ImageView
         android:id="@+id/icon"
         android:layout_width="170dp"
