@@ -88,7 +88,7 @@ public class BankActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             if (view == null){
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currency_grid,parent,false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bank_grid,parent,false);
             }
             TextView text;
             ImageView image;
