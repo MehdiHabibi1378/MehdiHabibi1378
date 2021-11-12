@@ -2,6 +2,8 @@ package com.example.crypto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,31 +35,93 @@ public class CurrencyActivity extends AppCompatActivity {
         icons.add(new CurrencyIcon("Bitcoin","BTC",R.drawable.currency));
     }
     String symbol;
-    String url , url1 = "https://min-api.cryptocompare.com/data/price?fsym=" , url2 ="&tsyms=USD,JPY,EUR&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
+    String url , url1 = "https://min-api.cryptocompare.com/data/generateAvg?fsym=" , url2 ="&tsym=USD&e=Kraken&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency);
         grid = findViewById(R.id.curre_grid);
-        for (int i=0;i<icons.size();i++){
-            url = url1+icons.get(i).getSymbol()+url2;
-            getData getdata = new getData(url,i);
+//        for (int i=0;i<icons.size();i++){
+//            url = url1+icons.get(i).getSymbol()+url2;
+//            getData getdata = new getData(url,i);
+//            getdata.execute();
+//            try{
+//
+//               getdata.get();
+//
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        CurrenccyAdapter adapter = new CurrenccyAdapter(icons);
+        grid.setAdapter(adapter);
+
+    }
+
+
+    class CurrenccyAdapter extends BaseAdapter {
+        ArrayList<CurrencyIcon> icons ;
+
+        public CurrenccyAdapter(ArrayList<CurrencyIcon> icons) {
+            this.icons = icons;
+        }
+
+        @Override
+        public int getCount() {
+            return icons.size();
+        }
+
+        @Override
+        public CurrencyIcon getItem(int position) {
+            return icons.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @SuppressLint("ResourceAsColor")
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            if (view == null){
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currncy_grid,parent,false);
+            }
+
+            url = url1+icons.get(position).getSymbol()+url2;
+            getData getdata = new getData(url,position);
             getdata.execute();
             try{
 
-               getdata.get();
+                getdata.get();
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+
+            TextView name,price;
+            ImageView image;
+            ImageButton imageButton;
+            imageButton =view.findViewById(R.id.imageButton);
+            name = view.findViewById(R.id.currency_name);
+            price = view.findViewById(R.id.currency_price);
+            image = view.findViewById(R.id.currency_icon);
+            name.setText(icons.get(position).getName());
+            price.setText(icons.get(position).getPrice());
+            image.setImageResource(icons.get(position).getImage());
+            Double color = icons.get(position).getChange();
+            if (color < 0) {
+                imageButton.setImageResource(R.drawable.dec);
+            }
+            return view;
         }
-
-        CurrenccyAdapter adapter = new CurrenccyAdapter(icons);
-        grid.setAdapter(adapter);
-
     }
+
     class getData extends AsyncTask {
         String url ;
         int position;
@@ -87,8 +152,13 @@ public class CurrencyActivity extends AppCompatActivity {
                 }
                 res = sb.toString();
                 JSONObject responsJson = new JSONObject(res);
-                String price = responsJson.getString("USD");
+                String raw = responsJson.getString("RAW");
+                responsJson = new JSONObject(raw);
+                String price = responsJson.getString("PRICE");
+                String change = responsJson.getString("CHANGEPCT24HOUR");
                 icons.get(position).setPrice(price);
+                icons.get(position).setChange(Double.parseDouble(change));
+                System.out.println(change);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -97,45 +167,6 @@ public class CurrencyActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return res;
-        }
-    }
-
-    class CurrenccyAdapter extends BaseAdapter {
-        ArrayList<CurrencyIcon> icons ;
-
-        public CurrenccyAdapter(ArrayList<CurrencyIcon> icons) {
-            this.icons = icons;
-        }
-
-        @Override
-        public int getCount() {
-            return icons.size();
-        }
-
-        @Override
-        public CurrencyIcon getItem(int position) {
-            return icons.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View view, ViewGroup parent) {
-            if (view == null){
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currncy_grid,parent,false);
-            }
-            TextView name,price;
-            ImageView image;
-            name = view.findViewById(R.id.currency_name);
-            price = view.findViewById(R.id.currency_price);
-            image = view.findViewById(R.id.currency_icon);
-            name.setText(icons.get(position).getName());
-            price.setText(icons.get(position).getPrice());
-            image.setImageResource(icons.get(position).getImage());
-            return view;
         }
     }
 

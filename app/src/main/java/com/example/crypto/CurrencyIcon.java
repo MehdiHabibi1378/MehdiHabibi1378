@@ -5,7 +5,7 @@ public class CurrencyIcon {
     private String symbol;
     private int image;
     private String price;
-    private int change;
+    private double change;
 
     public CurrencyIcon(String name, String symbol, int image) {
         this.name = name;
@@ -17,7 +17,7 @@ public class CurrencyIcon {
         this.price = price;
     }
 
-    public void setChange(int change) {
+    public void setChange(double change) {
         this.change = change;
     }
 
@@ -37,7 +37,7 @@ public class CurrencyIcon {
         return price;
     }
 
-    public int getChange() {
+    public double getChange() {
         return change;
     }
 }
