@@ -34,27 +34,27 @@ public class CurrencyActivity extends AppCompatActivity {
     {
         icons.add(new CurrencyIcon("Bitcoin","BTC",R.drawable.currency));
     }
-    String symbol;
+
     String url , url1 = "https://min-api.cryptocompare.com/data/generateAvg?fsym=" , url2 ="&tsym=USD&e=Kraken&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency);
         grid = findViewById(R.id.curre_grid);
-//        for (int i=0;i<icons.size();i++){
-//            url = url1+icons.get(i).getSymbol()+url2;
-//            getData getdata = new getData(url,i);
-//            getdata.execute();
-//            try{
-//
-//               getdata.get();
-//
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            } catch (ExecutionException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        for (int i=0;i<icons.size();i++){
+            url = url1+icons.get(i).getSymbol()+url2;
+            getData getdata = new getData(url,i);
+            getdata.execute();
+            try{
+
+               getdata.get();
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
 
         CurrenccyAdapter adapter = new CurrenccyAdapter(icons);
         grid.setAdapter(adapter);
@@ -91,30 +91,20 @@ public class CurrencyActivity extends AppCompatActivity {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.currncy_grid,parent,false);
             }
 
-            url = url1+icons.get(position).getSymbol()+url2;
-            getData getdata = new getData(url,position);
-            getdata.execute();
-            try{
-
-                getdata.get();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-
-            TextView name,price;
+            TextView name,price,grow;
             ImageView image;
             ImageButton imageButton;
             imageButton =view.findViewById(R.id.imageButton);
             name = view.findViewById(R.id.currency_name);
             price = view.findViewById(R.id.currency_price);
+            grow = view.findViewById(R.id.grow);
             image = view.findViewById(R.id.currency_icon);
             name.setText(icons.get(position).getName());
             price.setText(icons.get(position).getPrice());
             image.setImageResource(icons.get(position).getImage());
             Double color = icons.get(position).getChange();
+            String gr = String.format("%.2f",color.floatValue());
+            grow.setText("("+gr+")");
             if (color < 0) {
                 imageButton.setImageResource(R.drawable.dec);
             }
