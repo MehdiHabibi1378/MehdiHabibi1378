@@ -14,18 +14,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="70dp"/>
 
 
         <GridView
             android:id="@+id/main_grid"
-            android:layout_width="409dp"
-            android:layout_height="600dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:numColumns="2"
             android:verticalSpacing="2dp"

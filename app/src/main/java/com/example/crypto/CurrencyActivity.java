@@ -83,6 +83,7 @@ public class CurrencyActivity extends AppCompatActivity {
 
         CurrenccyAdapter adapter = new CurrenccyAdapter(icons);
         grid.setAdapter(adapter);
+        grid.setVerticalSpacing(13);
 
     }
 
@@ -132,7 +133,8 @@ public class CurrencyActivity extends AppCompatActivity {
             grow.setText("("+gr+")");
             if (color < 0) {
                 imageButton.setImageResource(R.drawable.dec);
-            }
+                grow.setTextColor(Color.parseColor("#FF001E"));
+            }else grow.setTextColor(Color.parseColor("#00FF0F"));
             return view;
         }
     }

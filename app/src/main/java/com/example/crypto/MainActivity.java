@@ -1,21 +1,14 @@
 package com.example.crypto;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -40,13 +33,11 @@ public class MainActivity extends AppCompatActivity {
         gridView = findViewById(R.id.main_grid);
         GridAdapter adapter = new GridAdapter(icons);
         gridView.setAdapter(adapter);
+        gridView.setVerticalSpacing(13);
+        gridView.setHorizontalSpacing(13);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(icons.get(i).getActivity());
-            }
-        });
+
+        gridView.setOnItemClickListener((adapterView, view, i, l) -> startActivity(icons.get(i).getActivity()));
 
 
     }

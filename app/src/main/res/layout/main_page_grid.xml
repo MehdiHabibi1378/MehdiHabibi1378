@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
     android:background="@drawable/round_background">
 
     <ImageView
@@ -22,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="button"
         android:textSize="20sp"
-        android:textColor="#44FAF8FA"
+        android:textColor="#97DCDA"
         android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/round_background"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp">
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp">
 
     <ImageView
         android:id="@+id/currency_icon"
-        android:layout_width="96dp"
-        android:layout_height="86dp"
+        android:layout_width="46dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="button"
-        android:textColor="#08F6F4"
-        android:textSize="20sp"
+        android:textColor="#5B9ED3"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currency_icon"
         app:layout_constraintHorizontal_bias="0.964"
@@ -38,14 +38,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="price"
-        android:textColor="#08F6F4"
+        android:textColor="#97DCDA"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/currency_name"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintEnd_toStartOf="@+id/currency_icon"
+        app:layout_constraintHorizontal_bias="0.037"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.431" />
 
     <TextView
         android:id="@+id/textView"
@@ -53,14 +53,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="دلار"
-        android:textColor="#08F6F4"
+        android:textColor="#97DCDA"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currency_icon"
-        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.477" />
 
     <TextView
         android:id="@+id/grow"
@@ -68,23 +68,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="رشد"
-        android:textColor="#08F6F4"
-        android:textSize="15sp"
+        android:textColor="#97DCDA"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currency_icon"
-        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintVertical_bias="0.409" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:background="@drawable/round_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/grow"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/in"
