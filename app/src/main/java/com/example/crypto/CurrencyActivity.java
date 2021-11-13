@@ -32,7 +32,32 @@ public class CurrencyActivity extends AppCompatActivity {
     GridView grid;
     ArrayList<CurrencyIcon> icons = new ArrayList<>();
     {
-        icons.add(new CurrencyIcon("Bitcoin","BTC",R.drawable.currency));
+        icons.add(new CurrencyIcon("Bitcoin","BTC",R.drawable.btc));
+        icons.add(new CurrencyIcon("Etherium","ETH",R.drawable.eth));
+        icons.add(new CurrencyIcon("Binance coin","BNB",R.drawable.bnb));
+        icons.add(new CurrencyIcon("Cardano","ADA",R.drawable.ada));
+        icons.add(new CurrencyIcon("XRP","XRP",R.drawable.xrp));
+        icons.add(new CurrencyIcon("Dogecoin","DOGE",R.drawable.doge));
+        icons.add(new CurrencyIcon("USD coin","USDC",R.drawable.usdc));
+        icons.add(new CurrencyIcon("Litecoin","LTC",R.drawable.ltc));
+        icons.add(new CurrencyIcon("ChainLink","LINK",R.drawable.link));
+        icons.add(new CurrencyIcon("Algorand","ALGO",R.drawable.algo));
+        icons.add(new CurrencyIcon("Bitcoin cash","BCH",R.drawable.bch));
+        icons.add(new CurrencyIcon("Stellar lumen","XLM",R.drawable.xlm));
+        icons.add(new CurrencyIcon("Cosmos","ATOM",R.drawable.atom));
+        icons.add(new CurrencyIcon("FileCoin","FIL",R.drawable.fil));
+        icons.add(new CurrencyIcon("Dai","DAI",R.drawable.dai));
+        icons.add(new CurrencyIcon("Zcash","ZEC",R.drawable.zec));
+        icons.add(new CurrencyIcon("Etherium classic","ETC",R.drawable.etc));
+        //icons.add(new CurrencyIcon("UMA","UMA",R.drawable.uma));
+        icons.add(new CurrencyIcon("Ox","ZRX",R.drawable.zrx));
+        icons.add(new CurrencyIcon("OMG network","OMG",R.drawable.omg));
+        icons.add(new CurrencyIcon("Basic Attention Token","BAT",R.drawable.bat));
+        icons.add(new CurrencyIcon("Decentralnd","MANA",R.drawable.mana));
+        icons.add(new CurrencyIcon("Kyber Network","KNC",R.drawable.knc));
+        //icons.add(new CurrencyIcon("Civic","CVC",R.drawable.cvc));
+        icons.add(new CurrencyIcon("Orchid","OXT",R.drawable.oxt));
+        icons.add(new CurrencyIcon("Numeraire","NMR",R.drawable.nmr));
     }
 
     String url , url1 = "https://min-api.cryptocompare.com/data/generateAvg?fsym=" , url2 ="&tsym=USD&e=Kraken&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";

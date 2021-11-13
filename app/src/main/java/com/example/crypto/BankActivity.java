@@ -45,7 +45,7 @@ public class BankActivity extends AppCompatActivity {
         icons.add(new BankIcon("بانک شهر",R.drawable.shahr,"https://www.shahr-bank.ir/"));
         icons.add(new BankIcon("بانک گردشگری",R.drawable.ardeshgari,"https://ibank.tourism-bank.com/"));
         icons.add(new BankIcon("بانک ایران زمین",R.drawable.iranzamin,"https://www.izbank.ir/"));
-        //icons.add(new BankIcon("بانک خاورمیانه",R.drawable.khavarmianeh,"https://en.middleeastbank.ir/"));
+        icons.add(new BankIcon("بانک خاورمیانه",R.drawable.khavarmianeh,"https://en.middleeastbank.ir/"));
         icons.add(new BankIcon("بانک آینده",R.drawable.ayande,"https://ba24.ir/"));
         icons.add(new BankIcon("بانک دی",R.drawable.dey,"https://www.bank-day.ir/"));
         icons.add(new BankIcon("بانک قرض الحسنه مهر ایران",R.drawable.mehr,"https://qmb.ir/index.aspx?tempname=Average&lang=1&sub=0&epageId=1310&isPopUp=false"));
