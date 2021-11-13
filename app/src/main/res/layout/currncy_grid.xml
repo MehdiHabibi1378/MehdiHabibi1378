@@ -55,6 +55,7 @@
         android:text="دلار"
         android:textColor="#97DCDA"
         android:textSize="15sp"
+        app:fontFamily="@font/yekanbplus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/currency_icon"
         app:layout_constraintHorizontal_bias="0.26"
