@@ -29,7 +29,7 @@ public class BankActivity extends AppCompatActivity {
         icons.add(new BankIcon("بانک سپه",R.drawable.sepah,"https://www.ebanksepah.ir/"));
         icons.add(new BankIcon("پست بانک ایران",R.drawable.post,"https://www.postbank.ir/"));
         icons.add(new BankIcon("بانک تجارت",R.drawable.tejarat,"https://www.tejaratbank.ir/index.php"));
-        icons.add(new BankIcon("بانک ملت",R.drawable.melat,"http://en.bankmellat.ir/"));
+        icons.add(new BankIcon("بانک ملت",R.drawable.melat,"http://bankmellat.ir/"));
         icons.add(new BankIcon("بانک صادرات ایران",R.drawable.saderat,"https://bsi.ir/Pages/Home.aspx"));
         icons.add(new BankIcon("بانک توسعه تعاون",R.drawable.tosetavon,"https://ttbank.ir/fa/"));
         icons.add(new BankIcon("بانک صنعت و معدن",R.drawable.sanatomadan,"https://www.bim.ir/fa-IR/Portal/1/page/%D8%B5%D9%81%D8%AD%D9%87-%D8%A7%D8%B5%D9%84%DB%8C"));

@@ -49,13 +49,13 @@ public class CurrencyActivity extends AppCompatActivity {
         icons.add(new CurrencyIcon("Dai","DAI",R.drawable.dai));
         icons.add(new CurrencyIcon("Zcash","ZEC",R.drawable.zec));
         icons.add(new CurrencyIcon("Etherium classic","ETC",R.drawable.etc));
-        icons.add(new CurrencyIcon("UMA","UMA",R.drawable.uma));
+        //icons.add(new CurrencyIcon("UMA","UMA",R.drawable.uma));
         icons.add(new CurrencyIcon("Ox","ZRX",R.drawable.zrx));
         icons.add(new CurrencyIcon("OMG network","OMG",R.drawable.omg));
         icons.add(new CurrencyIcon("Basic Attention Token","BAT",R.drawable.bat));
         icons.add(new CurrencyIcon("Decentralnd","MANA",R.drawable.mana));
         icons.add(new CurrencyIcon("Kyber Network","KNC",R.drawable.knc));
-        icons.add(new CurrencyIcon("Civic","CVC",R.drawable.cvc));
+        //icons.add(new CurrencyIcon("Civic","CVC",R.drawable.cvc));
         icons.add(new CurrencyIcon("Orchid","OXT",R.drawable.oxt));
         icons.add(new CurrencyIcon("Numeraire","NMR",R.drawable.nmr));
     }
@@ -83,7 +83,6 @@ public class CurrencyActivity extends AppCompatActivity {
 
         CurrenccyAdapter adapter = new CurrenccyAdapter(icons);
         grid.setAdapter(adapter);
-        grid.setVerticalSpacing(13);
 
     }
 
@@ -133,8 +132,9 @@ public class CurrencyActivity extends AppCompatActivity {
             grow.setText("("+gr+")");
             if (color < 0) {
                 imageButton.setImageResource(R.drawable.dec);
-                grow.setTextColor(Color.parseColor("#FF001E"));
-            }else grow.setTextColor(Color.parseColor("#00FF0F"));
+            }else {
+                imageButton.setImageResource(R.drawable.in);
+            }
             return view;
         }
     }
