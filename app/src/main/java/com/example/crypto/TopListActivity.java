@@ -159,9 +159,9 @@ class getData extends AsyncTask {
             res = sb.toString();
             JSONObject responsJson = new JSONObject(res);
             JSONArray raw = responsJson.getJSONArray("Data");
-            for (int i=0; i<10 ;i++){
-                String info = raw.getString(i);
-                responsJson = new JSONObject(info);
+            int i;
+            for (i=0; i<21 ;i++){
+                responsJson = raw.getJSONObject(i);
                 String sy = responsJson.getString("SYMBOL");
                 Double vol = responsJson.getDouble("VOLUME24HOURTO");
                 for (CurrencyIcon ico:icons) {
@@ -173,6 +173,7 @@ class getData extends AsyncTask {
                 System.out.println(sy);
                 //responsJson = new JSONObject(raw);
             }
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
