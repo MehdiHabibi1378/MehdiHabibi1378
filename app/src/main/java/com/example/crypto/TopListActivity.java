@@ -73,6 +73,26 @@ public class TopListActivity extends AppCompatActivity {
                     coin.setText("Binancecoin");
                     refresh();
                 }
+                if (item.getItemId() == R.id.USDcoin){
+                    symbol="USDC";
+                    coin.setText("USDcoin");
+                    refresh();
+                }
+                if (item.getItemId() == R.id.Litecoin){
+                    symbol="LTC";
+                    coin.setText("Litecoin");
+                    refresh();
+                }
+                if (item.getItemId() == R.id.ChainLink){
+                    symbol="LINK";
+                    coin.setText("ChainLink");
+                    refresh();
+                }
+                if (item.getItemId() == R.id.Ox){
+                    symbol="ZRX";
+                    coin.setText("OX");
+                    refresh();
+                }
                 return true;
             }
         });
@@ -206,8 +226,40 @@ class getData extends AsyncTask {
            // icons.add(new CurrencyIcon("Numeraire","NMR",new uncocoderDownloadImage(imageView).execute("http://uncocoder.com/imageview/image.png")));
             for (i=0; i<21 ;i++){
                 responsJson = raw.getJSONObject(i);
+                String image = null;
+                String name = responsJson.getString("NAME");
                 String sy = responsJson.getString("SYMBOL");
                 Double vol = responsJson.getDouble("VOLUME24HOURTO");
+                try {
+                    String imageUrl = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=";
+                    String imageKeyUrl = "&tsyms=USD,EUR&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
+                    String finalUrl = imageUrl+sy+imageKeyUrl;
+                    URL url = new URL(finalUrl);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoInput(true);
+                    connection.setDoOutput(true);
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String li;
+                    while ((li = bufferedReader.readLine()) !=null){
+                        stringBuilder.append(li +"\n");
+                    }
+                    String respons = stringBuilder.toString();
+                    JSONObject object = new JSONObject(respons);
+                    String result = object.getString("RAW");
+                    object = new JSONObject(result);
+                    result = object.getString(sy);
+                    object = new JSONObject(result);
+                    result = object.getString("USD");
+                    object = new JSONObject(result);
+                    image = object.getString("IMAGEURL");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 for (CurrencyIcon ico:icons) {
                     if (ico.getSymbol().equals(sy)){
                         ico.setPrice(vol.toString());
