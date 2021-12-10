@@ -3,15 +3,20 @@ package com.example.crypto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -20,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -29,28 +35,65 @@ import java.util.concurrent.ExecutionException;
 
 public class TopListActivity extends AppCompatActivity {
 
+    GridView grid;
+    TextView coin;
     ArrayList<CurrencyIcon> icons = new ArrayList<>();
-    String url , url1 = "https://min-api.cryptocompare.com/data/top/volumes?tsym=BTC" , url2 ="&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
+    String symbol = "BTC";
+    String url , url1 = "https://min-api.cryptocompare.com/data/top/volumes?tsym=" , url2 ="&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_list);
-        GridView grid = findViewById(R.id.top_grid);
-
-            url = url1+url2;
-            getData getdata = new getData(url);
-            getdata.execute();
-            try{
-
-                icons = (ArrayList<CurrencyIcon>) getdata.get();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+        grid = findViewById(R.id.top_grid);
+        coin = findViewById(R.id.symbol);
+        refresh();
+        coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMenu(v);
             }
-            TopListAdapter topListAdapter = new TopListAdapter(icons);
-            grid.setAdapter(topListAdapter);
+        });
+    }
+
+
+
+    private void showMenu (View v){
+        PopupMenu menu = new PopupMenu(TopListActivity.this,v);
+        menu.getMenuInflater().inflate(R.menu.menu , menu.getMenu());
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.Bitcoin){
+                    symbol="BTC";
+                    coin.setText("Bitcoin");
+                    refresh();
+                }
+                if (item.getItemId() == R.id.Binancecoin){
+                    symbol="BNB";
+                    coin.setText("Binancecoin");
+                    refresh();
+                }
+                return true;
+            }
+        });
+        menu.show();
+    }
+
+    private void refresh (){
+        url = url1+symbol+url2;
+        getData getdata = new getData(url);
+        getdata.execute();
+        try{
+
+            icons = (ArrayList<CurrencyIcon>) getdata.get();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        TopListAdapter topListAdapter = new TopListAdapter(icons);
+        grid.setAdapter(topListAdapter);
     }
 }
 
@@ -160,6 +203,7 @@ class getData extends AsyncTask {
             JSONObject responsJson = new JSONObject(res);
             JSONArray raw = responsJson.getJSONArray("Data");
             int i;
+           // icons.add(new CurrencyIcon("Numeraire","NMR",new uncocoderDownloadImage(imageView).execute("http://uncocoder.com/imageview/image.png")));
             for (i=0; i<21 ;i++){
                 responsJson = raw.getJSONObject(i);
                 String sy = responsJson.getString("SYMBOL");
@@ -182,5 +226,30 @@ class getData extends AsyncTask {
             e.printStackTrace();
         }
         return ic;
+    }
+}
+
+class LoadImage extends AsyncTask<String, Void, Bitmap> {
+    ImageView bmImage;
+
+    public LoadImage(ImageView bmImage) {
+        this.bmImage = bmImage;
+    }
+
+    protected Bitmap doInBackground(String... urls) {
+        String urldisplay = urls[0];
+        Bitmap mIcon11 = null;
+        try {
+            InputStream in = new java.net.URL(urldisplay).openStream();
+            mIcon11 = BitmapFactory.decodeStream(in);
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+        return mIcon11;
+    }
+
+    protected void onPostExecute(Bitmap result) {
+        bmImage.setImageBitmap(result);
     }
 }
