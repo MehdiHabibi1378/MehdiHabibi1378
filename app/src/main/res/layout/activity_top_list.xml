@@ -12,6 +12,7 @@
         android:layout_height="60dp"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
+
         <include layout="@layout/toolbar" />
     </LinearLayout>
 

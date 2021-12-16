@@ -10,7 +10,7 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/drawable/round_background.xml" value="0.2203125" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/drawable/round_background2.xml" value="0.2203125" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/activity_bank.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/activity_converter.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/activity_converter.xml" value="0.18" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/activity_currency.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/activity_main_page.xml" value="0.25" />
@@ -21,7 +21,9 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/main_page_grid.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/toolbar.xml" value="0.18" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/layout/toplist_grid.xml" value="0.33" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/menu/dest_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/menu/menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/Crypto/app/src/main/res/menu/surce_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/yas/AndroidStudioProjects/MehdiHabibi1378/app/src/main/res/drawable/currency_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/yas/AndroidStudioProjects/MehdiHabibi1378/app/src/main/res/drawable/round_background.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/yas/AndroidStudioProjects/MehdiHabibi1378/app/src/main/res/drawable/round_background2.xml" value="0.14635416666666667" />
