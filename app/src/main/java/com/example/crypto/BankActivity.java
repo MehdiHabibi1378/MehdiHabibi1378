@@ -1,29 +1,33 @@
 package com.example.crypto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class BankActivity extends AppCompatActivity {
-    GridView gridView;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank);
         ArrayList<BankIcon> icons = new ArrayList<>();
+
         icons.add(new BankIcon("بانک کشاورزی",R.drawable.keshavarzi,"https://ib.bki.ir/pid2.lmx"));
         icons.add(new BankIcon("بانک ملی",R.drawable.meli,"https://bmi.ir/"));
         icons.add(new BankIcon("بانک سپه",R.drawable.sepah,"https://www.ebanksepah.ir/"));
@@ -50,34 +54,37 @@ public class BankActivity extends AppCompatActivity {
         icons.add(new BankIcon("بانک دی",R.drawable.dey,"https://www.bank-day.ir/"));
         icons.add(new BankIcon("بانک قرض الحسنه مهر ایران",R.drawable.mehr,"https://qmb.ir/index.aspx?tempname=Average&lang=1&sub=0&epageId=1310&isPopUp=false"));
 
-        gridView = findViewById(R.id.bank_grid);
-        BankAdapter adapter = new BankAdapter(icons);
-        gridView.setAdapter(adapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        recyclerView = findViewById(R.id.banks_grid);
+        bankAdapter adapter = new bankAdapter(icons);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setPadding(5,0,5,4);
 
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(icons.get(i).getUrl())));
+        }
 
-            }
-        });
-    }
-
-    class BankAdapter extends BaseAdapter {
+    public class bankAdapter extends RecyclerView.Adapter<bankAdapter.MyViewHolder>
+    {
         ArrayList<BankIcon> icons ;
-        public BankAdapter(ArrayList<BankIcon> icons){
+        public bankAdapter(ArrayList<BankIcon> icons){
             this.icons=icons;
         }
 
-
+        @NonNull
         @Override
-        public int getCount() {
-            return icons.size();
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.bank_grid, parent, false);
+
+            return new MyViewHolder(itemView);
         }
 
         @Override
-        public BankIcon getItem(int position) {
-            return icons.get(position);
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            holder.image.setImageResource(icons.get(position).getImage());
+            holder.text.setText(icons.get(position).getName());
         }
 
         @Override
@@ -86,17 +93,62 @@ public class BankActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
-            if (view == null){
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bank_grid,parent,false);
-            }
+        public int getItemCount() {
+            return icons.size();
+        }
+
+        public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
             TextView text;
             ImageView image;
-            text = view.findViewById(R.id.currency_name);
-            image = view.findViewById(R.id.currency_icon);
-            text.setText(icons.get(position).getName());
-            image.setImageResource(icons.get(position).getImage());
-            return view;
+
+            public MyViewHolder(View view) {
+                super(view);
+                text = view.findViewById(R.id.bank_name);
+                image = view.findViewById(R.id.bank_icon);
+            }
+
+            @Override
+            public void onClick(View view) {
+                System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(icons.get(getPosition()).getUrl())));
+            }
         }
     }
+
+//    class BankAdapter extends BaseAdapter {
+//        ArrayList<BankIcon> icons ;
+//        public BankAdapter(ArrayList<BankIcon> icons){
+//            this.icons=icons;
+//        }
+//
+//
+//        @Override
+//        public int getCount() {
+//            return icons.size();
+//        }
+//
+//        @Override
+//        public BankIcon getItem(int position) {
+//            return icons.get(position);
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return position;
+//        }
+//
+//        @Override
+//        public View getView(int position, View view, ViewGroup parent) {
+//            if (view == null){
+//                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bank_grid,parent,false);
+//            }
+//            TextView text;
+//            ImageView image;
+//            text = view.findViewById(R.id.currency_name);
+//            image = view.findViewById(R.id.currency_icon);
+//            text.setText(icons.get(position).getName());
+//            image.setImageResource(icons.get(position).getImage());
+//            return view;
+//        }
+//    }
 }

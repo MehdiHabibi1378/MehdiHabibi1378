@@ -17,6 +17,51 @@
         android:id="@+id/ChainLink"
         android:title="ChainLink" />
     <item
+        android:id="@+id/Etherium"
+        android:title="Etherium" />
+    <item
+        android:id="@+id/Cardano"
+        android:title="Cardano" />
+    <item
+        android:id="@+id/XRP"
+        android:title="XRP" />
+    <item
+        android:id="@+id/Dogecoin"
+        android:title="Dogecoin" />
+    <item
+        android:id="@+id/Bitcoincash"
+        android:title="Bitcoin cash" />
+    <item
+        android:id="@+id/Algorand"
+        android:title="Algorand" />
+    <item
+        android:id="@+id/Stellarlumen"
+        android:title="Stellar lumen" />
+    <item
+        android:id="@+id/Cosmos"
+        android:title="Cosmos" />
+    <item
+        android:id="@+id/FileCoin"
+        android:title="FileCoin" />
+    <item
+        android:id="@+id/Dai"
+        android:title="Dai" />
+    <item
+        android:id="@+id/Zcash"
+        android:title="Zcash" />
+    <item
+        android:id="@+id/Etheriumclassic"
+        android:title="Etherium classic" />
+    <item
+        android:id="@+id/Decentralnd"
+        android:title="Decentralnd" />
+    <item
+        android:id="@+id/KyberNetwork"
+        android:title="Kyber Network" />
+    <item
+        android:id="@+id/OMGnetwork"
+        android:title="OMG network" />
+    <item
         android:id="@+id/Ox"
         android:title="Ox" />
 </menu>

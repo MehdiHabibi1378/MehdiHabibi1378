@@ -34,7 +34,6 @@ public class CurrencyActivity extends AppCompatActivity {
     {
         icons.add(new CurrencyIcon("Bitcoin","BTC",R.drawable.btc));
         icons.add(new CurrencyIcon("Etherium","ETH",R.drawable.eth));
-        icons.add(new CurrencyIcon("Binance coin","BNB",R.drawable.bnb));
         icons.add(new CurrencyIcon("Cardano","ADA",R.drawable.ada));
         icons.add(new CurrencyIcon("XRP","XRP",R.drawable.xrp));
         icons.add(new CurrencyIcon("Dogecoin","DOGE",R.drawable.doge));
@@ -49,18 +48,31 @@ public class CurrencyActivity extends AppCompatActivity {
         icons.add(new CurrencyIcon("Dai","DAI",R.drawable.dai));
         icons.add(new CurrencyIcon("Zcash","ZEC",R.drawable.zec));
         icons.add(new CurrencyIcon("Etherium classic","ETC",R.drawable.etc));
-        //icons.add(new CurrencyIcon("UMA","UMA",R.drawable.uma));
         icons.add(new CurrencyIcon("Ox","ZRX",R.drawable.zrx));
         icons.add(new CurrencyIcon("OMG network","OMG",R.drawable.omg));
         icons.add(new CurrencyIcon("Basic Attention Token","BAT",R.drawable.bat));
         icons.add(new CurrencyIcon("Decentralnd","MANA",R.drawable.mana));
         icons.add(new CurrencyIcon("Kyber Network","KNC",R.drawable.knc));
-        //icons.add(new CurrencyIcon("Civic","CVC",R.drawable.cvc));
         icons.add(new CurrencyIcon("Orchid","OXT",R.drawable.oxt));
-        icons.add(new CurrencyIcon("Numeraire","NMR",R.drawable.nmr));
-    }
+        icons.add(new CurrencyIcon("Siacoin","SC",R.drawable.sc));
+        icons.add(new CurrencyIcon("Augur","REP",R.drawable.rep));
 
-    String url , url1 = "https://min-api.cryptocompare.com/data/generateAvg?fsym=" , url2 ="&tsym=USD&e=Kraken&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
+        icons.add(new CurrencyIcon("Binance coin","BNB",R.drawable.bnb));
+        icons.add(new CurrencyIcon("Exchange Union","XUC",R.drawable.xuc));
+        icons.add(new CurrencyIcon("Numeraire","NMR",R.drawable.nmr));
+        icons.add(new CurrencyIcon("Power Ledger","POWER",R.drawable.power));
+        icons.add(new CurrencyIcon("OX Fina","OX",R.drawable.ox));
+        icons.add(new CurrencyIcon("Nexus","NXS",R.drawable.nxs));
+        icons.add(new CurrencyIcon("NAV Coin","NAV",R.drawable.nav));
+        icons.add(new CurrencyIcon("MaidSafeCoin","MAID",R.drawable.maid));
+        icons.add(new CurrencyIcon("FoldingCoin","FLDC",R.drawable.fldc));
+        icons.add(new CurrencyIcon("Ethos","ETHOS",R.drawable.ethos));
+        icons.add(new CurrencyIcon("Ark","ARK",R.drawable.ark));
+
+    }
+    //https://min-api.cryptocompare.com/data/generateAvg?fsym
+
+    String url , url1 = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" , url2 ="&tsyms=USD,EUR&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +80,7 @@ public class CurrencyActivity extends AppCompatActivity {
         grid = findViewById(R.id.curre_grid);
         for (int i=0;i<icons.size();i++){
             url = url1+icons.get(i).getSymbol()+url2;
-            getData getdata = new getData(url,i);
+            getData getdata = new getData(url,icons.get(i).getSymbol(),i);
             getdata.execute();
             try{
 
@@ -83,6 +95,7 @@ public class CurrencyActivity extends AppCompatActivity {
 
         CurrenccyAdapter adapter = new CurrenccyAdapter(icons);
         grid.setAdapter(adapter);
+        grid.setVerticalSpacing(10);
 
     }
 
@@ -125,7 +138,7 @@ public class CurrencyActivity extends AppCompatActivity {
             grow = view.findViewById(R.id.grow);
             image = view.findViewById(R.id.currency_icon);
             name.setText(icons.get(position).getName());
-            price.setText(icons.get(position).getPrice());
+            price.setText(String.format("%.3f", Double.parseDouble(icons.get(position).getPrice())));
             image.setImageResource(icons.get(position).getImage());
             Double color = icons.get(position).getChange();
             String gr = String.format("%.2f",color.floatValue());
@@ -140,11 +153,12 @@ public class CurrencyActivity extends AppCompatActivity {
     }
 
     class getData extends AsyncTask {
-        String url ;
+        String url , s;
         int position;
-        public getData(String url,int position){
+        public getData(String url,String s,int position){
             this.position=position;
             this.url = url;
+            this.s = s;
         }
 
         @Override
@@ -171,8 +185,10 @@ public class CurrencyActivity extends AppCompatActivity {
                 JSONObject responsJson = new JSONObject(res);
                 String raw = responsJson.getString("RAW");
                 responsJson = new JSONObject(raw);
-                String price = responsJson.getString("PRICE");
-                String change = responsJson.getString("CHANGEPCT24HOUR");
+                JSONObject sym = responsJson.getJSONObject(s);
+                JSONObject p = sym.getJSONObject("USD");
+                String price = p.getString("PRICE");
+                String change = p.getString("CHANGEPCT24HOUR");
                 icons.get(position).setPrice(price);
                 icons.get(position).setChange(Double.parseDouble(change));
                 System.out.println(change);

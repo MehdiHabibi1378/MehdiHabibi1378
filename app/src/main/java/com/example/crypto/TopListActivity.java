@@ -113,8 +113,8 @@ public class TopListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         TopListAdapter topListAdapter = new TopListAdapter(icons);
-        grid.setVerticalSpacing(13);
         grid.setAdapter(topListAdapter);
+        grid.setVerticalSpacing(7);
     }
 }
 
