@@ -5,9 +5,6 @@
         android:id="@+id/Bitcoin"
         android:title="Bitcoin" />
     <item
-        android:id="@+id/Binancecoin"
-        android:title="Binancecoin" />
-    <item
         android:id="@+id/USDcoin"
         android:title="USD coin" />
     <item

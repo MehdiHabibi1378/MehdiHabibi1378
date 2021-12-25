@@ -68,11 +68,6 @@ public class TopListActivity extends AppCompatActivity {
                     coin.setText("Bitcoin");
                     refresh();
                 }
-                if (item.getItemId() == R.id.Binancecoin){
-                    symbol="BNB";
-                    coin.setText("Binancecoin");
-                    refresh();
-                }
                 if (item.getItemId() == R.id.USDcoin){
                     symbol="USDC";
                     coin.setText("USDcoin");

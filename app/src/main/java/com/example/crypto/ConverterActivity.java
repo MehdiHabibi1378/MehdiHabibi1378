@@ -57,7 +57,12 @@ public class ConverterActivity extends AppCompatActivity {
         compute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                num = String.valueOf(number.getText());
+                String num_temp = String.valueOf(number.getText());
+                if (num_temp==null){
+                    num="1";
+                }else{
+                    num=num_temp;
+                }
                 String price1 = "0",price2="0";
                 Double totalMony,x;
                 Data data1 = new Data(url1+symbol_source+url2);
@@ -98,16 +103,6 @@ public class ConverterActivity extends AppCompatActivity {
                     if (index==1){
                        symbol_dec="BTC";
                        dec.setText("Bitcoin");
-                    }
-                }
-                if (item.getItemId() == R.id.Binancecoin){
-                    if (index==0){
-                        symbol_source="BNB";
-                        source.setText("Binancecoin");
-                    }
-                    if (index==1){
-                        symbol_dec="BNB";
-                        dec.setText("Binancecoin");
                     }
                 }
                 if (item.getItemId() == R.id.USDcoin){
