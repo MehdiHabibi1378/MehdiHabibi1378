@@ -9,8 +9,8 @@
 
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,13 +22,12 @@
 
         <GridView
             android:id="@+id/main_grid"
-            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:numColumns="2"
-            android:verticalSpacing="2dp"
             android:horizontalSpacing="2dp"
-            android:paddingRight="5dp" />
+            android:numColumns="2"
+            android:verticalSpacing="2dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
