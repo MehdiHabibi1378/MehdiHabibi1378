@@ -3,6 +3,7 @@ package com.example.crypto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -40,6 +41,12 @@ public class TopListActivity extends AppCompatActivity {
     ArrayList<CurrencyIcon> icons = new ArrayList<>();
     String symbol = "BTC";
     String url , url1 = "https://min-api.cryptocompare.com/data/top/volumes?tsym=" , url2 ="&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +156,7 @@ class TopListAdapter extends BaseAdapter {
         name = view.findViewById(R.id.currency_name);
         price = view.findViewById(R.id.currency_price);
         name.setText(icons.get(position).getName());
-        price.setText(icons.get(position).getPrice());
+        price.setText(String.format("%.4f",Double.parseDouble(icons.get(position).getPrice())));
         image.setImageResource(icons.get(position).getImage());
         return view;
     }
@@ -198,7 +205,7 @@ class getData extends AsyncTask {
             icons.add(new CurrencyIcon("Numeraire","NMR",R.drawable.nmr));
         }
         ArrayList<CurrencyIcon> ic = new ArrayList<>();
-        String res="none";
+        String res;
         try {
 
             URL u = new URL(url);

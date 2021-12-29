@@ -14,8 +14,9 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="256dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
@@ -25,12 +26,12 @@
             android:layout_width="160dp"
             android:layout_height="50dp"
             android:layout_marginEnd="12dp"
-            android:background="@drawable/round_background"
+            android:background="@drawable/converter_tbox"
             android:gravity="center"
             android:hint="0"
+            android:inputType="number"
             android:textColor="#97DCDA"
             android:textSize="30sp"
-            android:inputType="number"
             app:fontFamily="@font/yekanbplus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/coinsource"
@@ -46,23 +47,25 @@
             android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
+            android:gravity="center"
             android:text="ارز مبدا"
             android:textColor="#97DCDA"
             android:textSize="12sp"
-            android:gravity="center"
             app:fontFamily="@font/yekanbplus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="112dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         tools:ignore="MissingConstraints">
@@ -73,10 +76,10 @@
             android:layout_height="50dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
+            android:gravity="center"
             android:text="ارز ثانویه"
             android:textColor="#97DCDA"
             android:textSize="12sp"
-            android:gravity="center"
             app:fontFamily="@font/yekanbplus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,10 +92,10 @@
             android:layout_width="160dp"
             android:layout_height="50dp"
             android:layout_marginEnd="12dp"
-            android:background="@drawable/round_background"
+            android:background="@drawable/converter_tbox"
             android:gravity="center"
             android:text=" "
-            android:textColor="#97DCDA"
+            android:textColor="#00FFA6"
             android:textSize="30sp"
             app:fontFamily="@font/yekanbplus"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -120,4 +123,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="143dp"
+        android:layout_height="136dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/convert" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

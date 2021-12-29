@@ -3,16 +3,25 @@ package com.example.crypto;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.ArrayList;
 
@@ -21,16 +30,15 @@ public class MainActivity extends AppCompatActivity {
     GridView gridView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         ArrayList<Icon> icons = new ArrayList<>();
-        icons.add(new Icon("نرخ ارزها", R.drawable.currency, new Intent(MainActivity.this,CurrencyActivity.class)));
-        icons.add(new Icon("تاپ لیست معاملات", R.drawable.toplist, new Intent(MainActivity.this,TopListActivity.class)));
-        icons.add(new Icon("تبدیلگر ارز", R.drawable.converter, new Intent(MainActivity.this,ConverterActivity.class)));
-        icons.add(new Icon("دسترسی به بانکها", R.drawable.bank, new Intent(MainActivity.this,BankActivity.class)));
+        icons.add(new Icon("نرخ ارزها", R.raw.curr, new Intent(MainActivity.this,CurrencyActivity.class)));
+        icons.add(new Icon("تاپ لیست معاملات", R.raw.topl, new Intent(MainActivity.this,TopListActivity.class)));
+        icons.add(new Icon("تبدیلگر ارز", R.raw.conv, new Intent(MainActivity.this,ConverterActivity.class)));
+        icons.add(new Icon("دسترسی به بانکها", R.raw.bankk, new Intent(MainActivity.this,BankActivity.class)));
 
 
         gridView = findViewById(R.id.main_grid);
@@ -40,9 +48,51 @@ public class MainActivity extends AppCompatActivity {
         gridView.setHorizontalSpacing(13);
 
 
-        gridView.setOnItemClickListener((adapterView, view, i, l) -> startActivity(icons.get(i).getActivity()));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ProgressDialog progressDialog;
+                if(i==0 || i==1) {
+                    progressDialog = new ProgressDialog(MainActivity.this);
+                    progressDialog.setTitle("در حال دریافت داده ها . .");
+                    progressDialog.setMessage("کمی صبر کنید . . .");
+                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progressDialog.show();
+                    startActivity(icons.get(i).getActivity());
+                    finish();
+                }else { startActivity(icons.get(i).getActivity()); finish();}
+            }
+        });
 
 
+
+    }
+    class wait extends AsyncTask{
+        Intent activity;
+        public  wait(Intent a)
+        {
+            activity=a;
+
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            startActivity(activity);
+
+            return null;
+        }
     }
 
     class GridAdapter extends BaseAdapter {
@@ -74,13 +124,19 @@ public class MainActivity extends AppCompatActivity {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_page_grid,parent,false);
             }
             TextView text;
-            ImageView image;
+            LottieAnimationView l ;
             text = view.findViewById(R.id.button_text);
-            image = view.findViewById(R.id.icon);
+            l = view.findViewById(R.id.animation_view);
             text.setText(icons.get(position).getName());
-            image.setImageResource(icons.get(position).getId());
+            l.setAnimation(icons.get(position).getId());
+                    //setImageResource();
             return view;
         }
     }
+    public void toastMsg(String msg) {
+        Toast toast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
 
 }

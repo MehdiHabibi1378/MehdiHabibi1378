@@ -3,6 +3,9 @@ package com.example.crypto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -32,6 +35,13 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class CurrencyActivity extends AppCompatActivity {
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+        super.onBackPressed();
+    }
 
     GridView grid;
     ArrayList<CurrencyIcon> icons = new ArrayList<>();
@@ -79,9 +89,13 @@ public class CurrencyActivity extends AppCompatActivity {
     String url , url1 = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" , url2 ="&tsyms=USD,EUR&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency);
+
         grid = findViewById(R.id.curre_grid);
+
         for (int i=0;i<icons.size();i++){
             url = url1+icons.get(i).getSymbol()+url2;
             getData getdata = new getData(url,icons.get(i).getSymbol(),i);
@@ -164,6 +178,17 @@ public class CurrencyActivity extends AppCompatActivity {
             this.position=position;
             this.url = url;
             this.s = s;
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
         }
 
         @Override

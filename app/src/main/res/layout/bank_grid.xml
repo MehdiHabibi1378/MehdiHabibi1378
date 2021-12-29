@@ -7,7 +7,7 @@
     android:paddingTop="13dp"
     android:layout_marginTop="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/round_background">
+    android:background="@drawable/banks">
 
     <ImageView
         android:id="@+id/bank_icon"

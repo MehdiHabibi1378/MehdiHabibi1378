@@ -2,6 +2,7 @@ package com.example.crypto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -30,6 +31,12 @@ public class ConverterActivity extends AppCompatActivity {
     TextInputEditText number;
     TextView text;
     String  url1 = "https://min-api.cryptocompare.com/data/generateAvg?fsym=" , url2 ="&tsym=USD&e=Kraken&api_key=e69f17b4f7de2e7e0b7dd6f4f2715d7a53574dca42c4191de7412c9a4b56474c";
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
