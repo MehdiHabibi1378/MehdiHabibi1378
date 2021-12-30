@@ -9,15 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BankActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -62,16 +61,30 @@ public class BankActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.banks_grid);
         bankAdapter adapter = new bankAdapter(icons);
+//        adapter.setOnItemClickListener(new bankAdapter.MyViewHolder.ClickListener() {
+//            @Override
+//            public void onItemClick(int position, View v) {
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(icons.get(position).getUrl())));
+//                System.out.println("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
+//            }
+//
+//            @Override
+//            public void onItemLongClick(int position, View v) {
+//
+//            }
+//        });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         recyclerView.setPadding(5,0,5,4);
 
+
         }
 
-    public class bankAdapter extends RecyclerView.Adapter<bankAdapter.MyViewHolder>
+    public class bankAdapter extends  RecyclerView.Adapter<bankAdapter.MyViewHolder>
     {
+        //private MyViewHolder.ClickListener clickListener;
         ArrayList<BankIcon> icons ;
         public bankAdapter(ArrayList<BankIcon> icons){
             this.icons=icons;
@@ -91,19 +104,29 @@ public class BankActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             holder.image.setImageResource(icons.get(position).getImage());
             holder.text.setText(icons.get(position).getName());
+            holder.itemView.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(icons.get(position).getUrl()))));
+
         }
+
+
+
+        //@Override
+//        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+//            }
+
 
         @Override
         public long getItemId(int position) {
             return position;
         }
+        public int getid(int position){ return position;}
 
         @Override
         public int getItemCount() {
             return icons.size();
         }
 
-        public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+        public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener,View.OnLongClickListener{
             TextView text;
             ImageView image;
 
@@ -116,9 +139,25 @@ public class BankActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(icons.get(getPosition()).getUrl())));
+                //clickListener.onItemClick(getAdapterPosition(),view);
+                //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(icons.get(getPosition()).getUrl())));
             }
+
+            @Override
+            public boolean onLongClick(View view) {
+                return false;
+            }
+
+
+//            public interface ClickListener {
+//                void onItemClick(int position, View v);
+//                void onItemLongClick(int position, View v);
+//            }
+
         }
+//        public void setOnItemClickListener(MyViewHolder.ClickListener clickListener) {
+//            clickListener = clickListener;
+//        }
     }
 
 //    class BankAdapter extends BaseAdapter {
